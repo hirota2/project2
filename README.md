@@ -63,7 +63,7 @@ MVP
 バックエンド：Ruby on Rails
 フロントエンド：HTML、CSS、JavaScript
 DB：MySQL
-デプロイ先：Docker
+デプロイ先：Fly.io
 
 API
 ・Chart.js：グラフ
