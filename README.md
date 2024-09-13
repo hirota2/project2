@@ -3,7 +3,7 @@
 
 画面遷移図：https://www.figma.com/design/Hb9kVTnzGUHoQFIEbEj6WM/Untitled?node-id=0-1&t=r24jt7pBq7zejg1g-1
 
-ER図：https://i.gyazo.com/5c1af8361e07f377be4c4e3a804dafda.png
+ER図：https://i.gyazo.com/a083142e885351febb4177fd8b778735.png
 
 サービス概要
 どんなサービスなのかを３行で説明してください。
