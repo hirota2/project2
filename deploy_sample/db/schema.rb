@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_14_100216) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_26_180617) do
   create_table "tasks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "timers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "work_duration"
+    t.integer "break_duration"
+    t.datetime "work_or_break"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "status"
+    t.integer "sum_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
