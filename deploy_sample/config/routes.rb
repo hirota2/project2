@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+  root 'timers#top'  # トップ画面にタイマーを表示
+  post 'timers/start', to: 'timers#start', as: 'timers_start'
+  post 'timers/change', to: 'timers#change', as: 'timers_change'
+  post 'timers/reset', to: 'timers#reset', as: 'timers_reset'
+  resources :timers
   resources :tasks
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
