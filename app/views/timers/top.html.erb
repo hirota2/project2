@@ -1,0 +1,94 @@
+<h1>pomodo</h1>
+<div class="text-center">
+  <div id="timer-display">
+    <p>現在の状態: <span id="timer-status">
+    <%= case @timer.status
+      when 0 then '作業前'
+      when 1 then '作業中'
+      when 2 then '休憩中'
+      else '作業前'
+      end %>
+    </span></p>
+    <p>残り時間: <span id="remaining-time"><%= @timer.work_duration || 25 %>分00秒</span></p>
+    <%= button_to '開始', timers_start_path, method: :post, class: "shadow-lg bg-blue-500 shadow-blue-500/50 text-white rounded px-2 py-1", id: 'toggle-timer-button' %>
+    <p>合計時間: <span id="regular-timer">0h 00m</span></p>
+    <%= button_to 'リセット', timers_start_path, method: :post, class: "shadow-lg bg-blue-500 shadow-blue-500/50 text-white rounded px-2 py-1", id: 'reset-timer-button' %>
+  </div>
+</div>
+<script>
+  let timerInterval;
+  let isWorkTime = true; // 作業時間か休憩時間かを追跡
+  let isTimerRunning = false; // タイマーが動作中かどうかを追跡
+  let defaultWorkDuration = 25 * 60; // 作業時間  25分
+  let defaultBreakDuration = 5 * 60; // 休憩時間  5分
+  let regularDuration = 0; // 通常タイマーの初期化
+  let remainingTime = defaultWorkDuration; // 残り時間の初期化
+
+  document.getElementById("toggle-timer-button").addEventListener("click", function(event) {
+    event.preventDefault();
+    if (isTimerRunning) {
+      stopTimer(); // タイマーを停止
+    } else {
+      startTimer(); // タイマーを再開
+      document.getElementById("timer-status").textContent = "作業中";
+    }
+  });
+
+  document.getElementById("reset-timer-button").addEventListener("click", function(event) {
+    event.preventDefault();
+    clearInterval(timerInterval); // タイマーを停止
+    resetTimerDisplay(); // タイマーをリセット
+    document.getElementById("toggle-timer-button").textContent = "開始";
+    isTimerRunning = false;
+  });
+
+  function startTimer() {
+    isTimerRunning = true;
+    document.getElementById("toggle-timer-button").textContent = "停止";
+
+    let duration = remainingTime; // 前回の残り時間からスタート
+    clearInterval(timerInterval); // 既存のタイマーがあればクリア
+
+    timerInterval = setInterval(() => {
+      if (duration <= 0) {
+        clearInterval(timerInterval);
+        isWorkTime = !isWorkTime; // 作業と休憩を切り替え
+        document.getElementById("timer-status").textContent = isWorkTime ? '作業中' : '休憩中';
+        clearInterval(regularInterval); // 通常タイマーを停止
+        remainingTime = isWorkTime ? defaultWorkDuration : defaultBreakDuration; // 次の残り時間をセット
+        alert(isWorkTime ? "休憩終了、作業時間を開始します" : "作業終了、休憩時間を開始します"); //ポップアップの表示
+        startTimer(); // タイマーを再起動
+        return;
+      }
+
+      duration -= 1;
+      remainingTime = duration; // 残り時間を更新
+      const minutes = Math.floor(duration / 60);
+      const seconds = duration % 60;
+      document.getElementById("remaining-time").textContent = `${minutes}分${seconds.toString().padStart(2, '0')}秒`;
+    }, 1000);
+
+    regularInterval = setInterval(() => {
+      regularDuration += 1; // 1秒ずつ増加
+      const hours = Math.floor(regularDuration / 3600); // 時間を計算
+      const minutes = Math.floor((regularDuration % 3600) / 60); // 分を計算
+      const seconds = regularDuration % 60; // 秒を計算
+      document.getElementById("regular-timer").textContent = `${hours}h ${minutes.toString().padStart(2, '0')}m`;
+    }, 1000);
+  }
+
+  function stopTimer() {
+    isTimerRunning = false;
+    clearInterval(timerInterval); // ポモドーロタイマーを停止
+    clearInterval(regularInterval); // 通常タイマーを停止
+    document.getElementById("toggle-timer-button").textContent = "再開";
+  }
+
+  function resetTimerDisplay() {
+    document.getElementById("remaining-time").textContent = "25分00秒"; // リセット時に25分に戻す
+    document.getElementById("timer-status").textContent = "作業前";
+    clearInterval(regularInterval); // 通常タイマーを停止
+    isWorkTime = true; // 作業時間から再開
+    remainingTime = defaultWorkDuration; // 残り時間もリセット
+  }
+</script>
