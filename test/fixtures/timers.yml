@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  work_duration: 1
+  break_duration: 1
+  work_or_break: 2024-11-05 07:24:17
+  start_time: 2024-11-05 07:24:17
+  end_time: 2024-11-05 07:24:17
+  status: 1
+  sum_time: 1
+
+two:
+  work_duration: 1
+  break_duration: 1
+  work_or_break: 2024-11-05 07:24:17
+  start_time: 2024-11-05 07:24:17
+  end_time: 2024-11-05 07:24:17
+  status: 1
+  sum_time: 1
