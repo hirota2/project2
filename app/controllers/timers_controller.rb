@@ -6,11 +6,11 @@ class TimersController < ApplicationController
   end
 
   def change
-    add_column :timers, :status, :string, default: 'work'
+    add_column :timers, :status, :string, default: "work"
   end
 
   def reset
     @timer = Timer.first_or_create(work_duration: 25, break_duration: 5)
-    @timer.update(status: 'work', work_duration: 25 * 60) # 25分にリセット
+    @timer.update(status: "work", work_duration: 25 * 60) # 25分にリセット
   end
 end
