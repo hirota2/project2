@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_04_222417) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_05_213918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,5 +30,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_222417) do
     t.integer "sum_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "remaining_time"
+    t.boolean "is_work_time"
   end
 end
