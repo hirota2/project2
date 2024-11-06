@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   post "timers/start", to: "timers#start", as: "timers_start"
   post "timers/change", to: "timers#change", as: "timers_change"
   post "timers/reset", to: "timers#reset", as: "timers_reset"
-  resources :timers
+  post 'timers/save_state', to: 'timers#save_state'
+  resources :timers, only: [:show, :create, :update, :destroy]
   resources :tasks
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
