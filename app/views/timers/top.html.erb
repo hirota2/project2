@@ -9,7 +9,7 @@
       else '作業前'
       end %>
     </span></p>
-    <p>残り時間: <span id="remaining-time"><%= @timer.work_duration || 1 %>分00秒</span></p>
+    <p>残り時間: <span id="remaining-time"><%= @timer.work_duration || 25 %>分00秒</span></p>
     <%= button_to '開始', timers_start_path, method: :post, class: "shadow-lg bg-blue-500 shadow-blue-500/50 text-white rounded px-2 py-1", id: 'toggle-timer-button' %>
     <p>タイマー: <span id="regular-timer">0h 00m</span></p>
     <%= button_to 'リセット', timers_start_path, method: :post, class: "shadow-lg bg-blue-500 shadow-blue-500/50 text-white rounded px-2 py-1", id: 'reset-timer-button' %>
@@ -19,7 +19,7 @@
   let timerInterval;
   let isWorkTime = true; // 作業時間か休憩時間かを追跡
   let isTimerRunning = false; // タイマーが動作中かどうかを追跡
-  let defaultWorkDuration = 1 * 60; // 作業時間  25分
+  let defaultWorkDuration = 25 * 60; // 作業時間  25分
   let defaultBreakDuration = 5 * 60; // 休憩時間  5分
   let remainingTime = defaultWorkDuration; // 残り時間の初期化
   let lastTimestamp = null;
@@ -119,7 +119,7 @@ function resetTimerDisplay() {
   document.getElementById("timer-status").textContent = "作業前"; // タイマーの状態を作業前に戻す
 
   // 時間表示を「作業前」に戻す
-  document.getElementById("remaining-time").textContent = "1分00秒";
+  document.getElementById("remaining-time").textContent = "25分00秒";
   clearInterval(timerInterval); // タイマーを停止
 }
 
