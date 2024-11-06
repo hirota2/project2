@@ -56,8 +56,8 @@
   }
   
   function startTimer() {
-  isTimerRunning = true;
-  document.getElementById("toggle-timer-button").textContent = "停止";
+    isTimerRunning = true;
+    document.getElementById("toggle-timer-button").textContent = "停止";
 
     function updateTimer(timestamp) {
         if (!isTimerRunning) return; // タイマーが停止中なら処理を中断
@@ -104,9 +104,9 @@
   }
 
   document.getElementById("reset-timer-button").addEventListener("click", function(event) {
-  event.preventDefault();
-  resetTimerDisplay(); // リセット時に状態を戻す
-});
+    event.preventDefault();
+    resetTimerDisplay(); // リセット時に状態を戻す
+  });
 
 // リセット時の表示更新
 function resetTimerDisplay() {
